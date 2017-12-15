@@ -1,0 +1,26 @@
+{
+  "name": "wix-eventually",
+  "version": "1.0.0",
+  "description": "retrying execution of function for tests",
+  "main": "index.js",
+  "author": "Vilius Lukosius <vilius@wix.com>",
+  "license": "ISC",
+  "homepage": "https://github.com/wix/wix-eventually",
+  "scripts": {
+    "test": "mocha 'test/**/*.spec.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wix/wix-eventually"
+  },
+  "bugs": {
+    "url": "https://github.com/wix/wix-eventually/issues"
+  },
+  "devDependencies": {
+    "chai": "~4.1.2",
+    "mocha": "~4.0.1"
+  },
+  "dependencies": {
+    "trier-promise": "~1.0.1"
+  }
+}
