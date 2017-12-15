@@ -13,6 +13,7 @@ function eventually(fn, opts) {
       throw err
     })
     const options = Object.assign({action}, defaults, opts)
+
     return trier(options).catch(() => {
       if (error !== null) {
         error.message = `Timeout of ${options.timeout} ms with: ` + error.message
