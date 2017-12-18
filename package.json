@@ -1,12 +1,14 @@
 {
   "name": "wix-eventually",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "retrying execution of function for tests",
-  "main": "index.js",
+  "main": "dist/index.umd.js",
   "author": "Vilius Lukosius <vilius@wix.com>",
   "license": "ISC",
   "homepage": "https://github.com/wix/wix-eventually",
   "scripts": {
+    "build": "webpack --output-library-target=umd index.js dist/index.umd.js",
+    "pretest": "npm run build",
     "test": "mocha 'test/**/*.spec.js'"
   },
   "repository": {
@@ -21,7 +23,8 @@
   },
   "devDependencies": {
     "chai": "~4.1.2",
-    "mocha": "~4.0.1"
+    "mocha": "~4.0.1",
+    "webpack": "3.10.0"
   },
   "dependencies": {
     "trier-promise": "~1.0.1"
