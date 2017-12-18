@@ -1,4 +1,4 @@
-# wix-eventually
+# wix-eventually [![Build Status](https://travis-ci.org/wix/wix-eventually.svg?branch=master)](https://travis-ci.org/wix/wix-eventually)
 
 Retries promise until timeout expires. Use in your tests!
 
