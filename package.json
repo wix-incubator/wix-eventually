@@ -1,6 +1,6 @@
 {
   "name": "wix-eventually",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "retrying execution of function for tests",
   "main": "index.js",
   "author": "Vilius Lukosius <vilius@wix.com>",

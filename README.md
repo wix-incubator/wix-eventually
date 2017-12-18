@@ -1,6 +1,6 @@
 # wix-eventually
 
-Retries promise until timeout expires. Use in your tests!
+Retries promise until timeout expires in a linear fashion with delays defined by `interval`. Given this module is inteded to be used **only** within tests it does not provide more robust strategies like [retry-as-promised](https://www.npmjs.com/package/retry-as-promised), but instead is designed to be predictable and fit within timeouts defined for your tests.
 
 Uses defaults:
  - timeout: 10s;
