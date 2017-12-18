@@ -1,7 +1,12 @@
 language: node_js
 branches:
- only:
+  only:
   - master
 script:
- - npm install
- - npm test
+- npm install
+- npm test
+deploy:
+  provider: npm
+  email: vilius.lukosius@gmail.com
+  api_key:
+    secure: t5Ygsg7/EjU+zCv57q+9JXbWE86kUyCamcsf+/Kfmz5zRYPMtVPW5pynGD98Ver8pEpOjFvzUyEoqXJiLqjH1jFwkhnQtQf8ugjJlmR6vmeODXrK3/1H8fH/xFxgbjYkkmnmjxoGLKuyvXJYQnnTVGOVAjyAO5UsdRb1nq8kha+rpr3iKT6MH7sjSmy7qKwtFVtPoaUm04ifLMoZr0SMO5KM3jv/lGyDO6o6ec1JyU/x2NioLw6taaAFEKTiyFd7K9e27FWgXgscFE4Fngq6u6Rd0864M440zgLnWXHLIzHnDTTpmpwvxzKlZhtexEEKQPsPVn9fZiOQ5+wG/rpNRhazvcLqGk8saoGOdq0eeHp+LGP5IgU3j1dW4pMQq0J9wr8LFgmvMNqsJuRNwyEdiN362yn6mFjqaFlYMEbxfDFlO3ZBdaUiNDcP5mX9p8xK/P1ay6zp5H8OdQcAIAAqkhttXR1sy9e7WBb7ueYeFLJTukRQzTkXkGsmV1l9wKGHeQVw1TbEczF7QZ+h7wmtizolFze360LOs2LxxyJPBdB3HN29vJFCao0yvgOlFPS5RbrAS3XkKXZjJHuigDB8e/vv6sm55KS6DmVVhXeAB3ydyel3DeTac+TS0Ap8A+Z0cuUvZae+EOVIuY6OV2QpzowGB0I0stoGupkYxH/kwBs=
