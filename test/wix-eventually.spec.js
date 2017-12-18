@@ -1,4 +1,4 @@
-const retry = require('..')
+const retry = require('../dist/index.umd')
 const {expect} = require('chai')
 
 describe('wix-eventually', function() {
