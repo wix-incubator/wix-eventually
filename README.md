@@ -1,4 +1,4 @@
-# wix-eventually [![Build Status](https://travis-ci.org/wix/wix-eventually.svg?branch=master)](https://travis-ci.org/wix/wix-eventually)
+# wix-eventually [![Build Status](https://travis-ci.org/wix/wix-eventually.svg?branch=master)](https://travis-ci.org/wix/wix-eventually) [![npm version](https://badge.fury.io/js/wix-eventually.svg)](https://badge.fury.io/js/wix-eventually)
 
 Retries promise until timeout expires in a linear fashion with delays defined by `interval`. Given this module is inteded to be used **only** within tests it does not provide more robust strategies like [retry-as-promised](https://www.npmjs.com/package/retry-as-promised), but instead is designed to be predictable and fit within timeouts defined for your tests.
 
