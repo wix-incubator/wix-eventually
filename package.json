@@ -9,7 +9,8 @@
   "scripts": {
     "build": "webpack --output-library-target=umd index.js dist/index.umd.js",
     "pretest": "npm run build",
-    "test": "mocha 'test/**/*.spec.js'"
+    "test:typings": "TS_NODE_TYPE_CHECK=true mocha --require ts-node/register 'test/typings.spec.ts'",
+    "test": "mocha 'test/**/*.spec.js' && npm run test:typings"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,11 @@
     "node": ">=6"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.48",
     "chai": "~4.1.2",
     "mocha": "~4.0.1",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.7.1",
     "webpack": "3.10.0"
   },
   "dependencies": {
