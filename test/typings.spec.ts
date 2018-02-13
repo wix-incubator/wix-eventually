@@ -14,14 +14,14 @@ describe('wix-eventually types', () => {
     eventually(() => true);
   });
 
-  it('should accepts options', () => {
+  it('accepts options', () => {
     eventually(() => true, {
       timeout: 1000,
       interval: 5000
     });
   });
 
-  it('should accepts partial options', () => {
+  it('accepts partial options', () => {
     eventually(() => true, {
       timeout: 1000
     });
@@ -52,6 +52,43 @@ describe('wix-eventually types', () => {
 
       eventually.with({
         interval: 5000
+      });
+    });
+
+    describe('return value', () => {
+      let eventuallyWith;
+
+      beforeEach(() => {
+        eventuallyWith = eventually.with({});
+      })
+
+      it('shoule be a function', () => {
+        expect(eventuallyWith).to.be.a('function');
+      });
+
+      it('should return a promise', () => {
+        expect(eventuallyWith(() => true)).to.be.a('promise');
+      });
+
+      it('does not require options', () => {
+        eventuallyWith(() => true);
+      });
+
+      it('accepts options', () => {
+        eventuallyWith(() => true, {
+          timeout: 1000,
+          interval: 5000
+        });
+      });
+
+      it('accepts partial options', () => {
+        eventuallyWith(() => true, {
+          timeout: 1000
+        });
+
+        eventuallyWith(() => true, {
+          interval: 5000
+        });
       });
     });
 
