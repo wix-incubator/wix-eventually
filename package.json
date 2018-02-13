@@ -1,6 +1,6 @@
 {
   "name": "wix-eventually",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "retrying execution of function for tests",
   "main": "dist/index.umd.js",
   "author": "Vilius Lukosius <vilius@wix.com>",
