@@ -1,101 +1,108 @@
 import {expect} from 'chai';
 import * as eventually from '..';
 
-describe('wix-eventually types', () => {
-  it('exports a function', () => {
-    expect(eventually).to.be.a('function');
-  });
+describe('wix-eventually types', function () {
+    this.timeout(20000);
 
-  it('should return a promise', () => {
-    expect(eventually(() => true)).to.be.a('promise');
-  });
-
-  it('does not require options', () => {
-    eventually(() => true);
-  });
-
-  it('accepts options', () => {
-    eventually(() => true, {
-      timeout: 1000,
-      interval: 5000
-    });
-  });
-
-  it('accepts partial options', () => {
-    eventually(() => true, {
-      timeout: 1000
+    it('exports a function', () => {
+        expect(eventually).to.be.a('function');
     });
 
-    eventually(() => true, {
-      interval: 5000
-    });
-  });
-
-  describe('with', () => {
-    it('should be a function', () => {
-      expect(eventually.with).to.be.a('function');
+    it('should return a promise', done => {
+        eventually(() => true).then(() => done());
     });
 
-    it('should require options', () => {
-      eventually.with({
-        timeout: 1000,
-        interval: 5000
-      });
+    it('does not require options', () => {
+        return eventually(() => true);
     });
 
-    it('should support partial options', () => {
-      eventually.with({});
+    it('respects timeout', done => {
+        const fn = () => Promise.reject(new Error('woops'));
 
-      eventually.with({
-        timeout: 1000
-      });
-
-      eventually.with({
-        interval: 5000
-      });
-    });
-
-    describe('return value', () => {
-      let eventuallyWith;
-
-      beforeEach(() => {
-        eventuallyWith = eventually.with({});
-      })
-
-      it('shoule be a function', () => {
-        expect(eventuallyWith).to.be.a('function');
-      });
-
-      it('should return a promise', () => {
-        expect(eventuallyWith(() => true)).to.be.a('promise');
-      });
-
-      it('does not require options', () => {
-        eventuallyWith(() => true);
-      });
-
-      it('accepts options', () => {
-        eventuallyWith(() => true, {
-          timeout: 1000,
-          interval: 5000
+        eventually(fn, {timeout: 10}).catch(e => {
+            expect(e.message).to.be.string('Timeout of 10 ms');
+            done();
         });
-      });
+    });
 
-      it('accepts partial options', () => {
-        eventuallyWith(() => true, {
-          timeout: 1000
+    it('respects interval', done => {
+        let retryCount = 0
+        const fn = () => {
+            retryCount++;
+            throw new Error('ups');
+        };
+
+        eventually(fn, {timeout: 100, interval: 10}).catch(() => {
+            expect(retryCount).to.be.gt(9).lt(12);
+            done();
+        });
+    });
+
+    describe('with', () => {
+
+        it('respects timeout', done => {
+            const fn = () => Promise.reject(new Error('woops'));
+
+            eventually.with({timeout: 10})(fn).catch(e => {
+                expect(e.message).to.be.string('Timeout of 10 ms');
+                done();
+            });
         });
 
-        eventuallyWith(() => true, {
-          interval: 5000
-        });
-      });
-    });
+        it('respects interval', done => {
+            let retryCount = 0
+            const fn = () => {
+                retryCount++;
+                throw new Error('ups');
+            };
 
-    it('should return a function that returns a promise', () => {
-      expect(eventually.with({})).to.be.a('function');
-      expect(eventually.with({})(() => true)).to.be.a('promise');
+            eventually.with({timeout: 100, interval: 10})(fn).catch(() => {
+                expect(retryCount).to.be.gt(9).lt(12);
+                done();
+            });
+        });
+
+        describe('return value', () => {
+            let eventuallyWith;
+
+            beforeEach(() => {
+                eventuallyWith = eventually.with({});
+            })
+
+            it('should be a function', () => {
+                expect(eventuallyWith).to.be.a('function');
+            });
+
+            it('should return a promise', done => {
+                eventuallyWith(() => true).then(() => done());
+            });
+
+            it('override with options with explicit call options', done => {
+                const fn = () => Promise.reject(new Error('woops'));
+
+                eventually.with({timeout: 10000})(fn, {timeout: 10}).catch(e => {
+                    expect(e.message).to.be.string('Timeout of 10 ms');
+                    done();
+                });
+            });
+
+            it('respects interval', done => {
+                let retryCount = 0
+                const fn = () => {
+                    retryCount++;
+                    throw new Error('ups');
+                };
+
+                eventually.with({timeout: 10000, interval: 100000})(fn, {timeout: 100, interval: 10}).catch(() => {
+                    expect(retryCount).to.be.gt(9).lt(12);
+                    done();
+                });
+            });
+        });
+
+        it('should return a function that returns a promise', done => {
+            eventually.with({})(() => true).then(() => done());
+        });
     });
-  });
 });
 
