@@ -16,16 +16,16 @@ npm install --save-dev wix-eventually
 
 ```js
 const eventually = require('wix-eventually')
-const { expect } = require('chai')
+const {expect} = require('chai')
 
 describe('example', () => {
+  it('should retry', async () => {
+    let hasCompleted = false
+    setTimeout(() => (hasCompleted = true), 1000)
 
-  it('should retry', () => {
-    let hasCompleted = false;
-  	setTimeout(() => hasCompleted = true, 1000)
-
-  	return Promise.resolve()  	  
-  	  .then(() => eventually(() => expect(hasCompleted).to.equal(true))
+    await eventually(() => {
+      expect(hasCompleted).to.equal(true)
+    })
   })
 })
 ```
