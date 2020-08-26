@@ -2,7 +2,7 @@ export = WixEventually;
 
 type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 
-declare function WixEventually<ReturnValue>(fn: (...args: any) => ReturnValue, opts?: WixEventually.Opts): Promise<UnPromisify<ReturnValue>>;
+declare function WixEventually<ReturnValue>(fn: () => ReturnValue, opts?: WixEventually.Opts): Promise<UnPromisify<ReturnValue>>;
 
 declare namespace WixEventually {
   export interface Opts {
