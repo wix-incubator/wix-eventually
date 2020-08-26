@@ -10,6 +10,6 @@ declare namespace WixEventually {
     interval?: number;
   }
 
-  function _with(overrides: Opts): <ReturnValue extends any>(fn: (...args: any) => ReturnValue, opts?: WixEventually.Opts) => Promise<UnPromisify<ReturnValue>>;
+  function _with(overrides: Opts): <ReturnValue>(fn: () => ReturnValue, opts?: WixEventually.Opts) => Promise<UnPromisify<ReturnValue>>;
   export { _with as with }
 }
