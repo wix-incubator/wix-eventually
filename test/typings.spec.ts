@@ -12,6 +12,29 @@ describe('wix-eventually types', function () {
         eventually(() => true).then(() => done());
     });
 
+    it('should return a promise resolving to function result', done => {
+        eventually(() => Promise.resolve('success')).then(result => {
+            expect(result).to.be.string('success');
+            done();
+        });
+    });
+
+    it('should return a promise resolving to function success result', done => {
+        let retryCount = 0;
+        const fn = () => {
+            retryCount++;
+            if (retryCount === 2) {
+                return 'success'
+            }
+            throw new Error('ups');
+        };
+
+        eventually(fn).then(result => {
+            expect(result).to.be.string('success');
+            done();
+        });
+    });
+
     it('does not require options', () => {
         return eventually(() => true);
     });
@@ -75,6 +98,29 @@ describe('wix-eventually types', function () {
 
             it('should return a promise', done => {
                 eventuallyWith(() => true).then(() => done());
+            });
+
+            it('should return a promise resolving to function result', done => {
+                eventuallyWith(() => Promise.resolve('message')).then(result => {
+                    expect(result).to.be.string('message');
+                    done();
+                });
+            });
+
+            it('should return a promise resolving to function success result', done => {
+                let retryCount = 0;
+                const fn = () => {
+                    retryCount++;
+                    if (retryCount === 2) {
+                        return 'success'
+                    }
+                    throw new Error('ups');
+                };
+
+                eventuallyWith(fn).then(result => {
+                    expect(result).to.be.string('success');
+                    done();
+                });
             });
 
             it('override with options with explicit call options', done => {
