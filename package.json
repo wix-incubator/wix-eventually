@@ -12,6 +12,10 @@
     "test:typings": "TS_NODE_TYPE_CHECK=true mocha --require ts-node/register 'test/typings.spec.ts'",
     "test": "mocha 'test/**/*.spec.js' && npm run test:typings"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "versionBumpStrategy": "none"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/wix/wix-eventually"
