@@ -1,7 +1,7 @@
 const trier = require('trier-promise')
 
 const defaults = {
-  timeout: 10000,
+  timeout: 2000,
   interval: 200
 }
 
@@ -12,7 +12,7 @@ function eventually(fn, opts) {
       error = err
       throw err
     })
-    const options = Object.assign({action}, defaults, opts)
+    const options = Object.assign({ action }, defaults, opts)
 
     return trier(options).catch(() => {
       if (error !== null) {
